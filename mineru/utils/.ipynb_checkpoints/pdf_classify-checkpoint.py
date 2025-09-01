@@ -211,7 +211,7 @@ def extract_pages(src_pdf_bytes: bytes) -> bytes:
         output_buffer = BytesIO()
         sample_docs.save(output_buffer)
 
-        print('extract_pages cost', time.time()-s)
+        # print('extract_pages cost', time.time()-s)
 
         # 获取字节数据
         return output_buffer.getvalue()
