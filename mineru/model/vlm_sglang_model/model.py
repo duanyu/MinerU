@@ -187,6 +187,8 @@ class Mineru2QwenForCausalLM(nn.Module):
             raise ValueError(f"Unexpected select feature strategy: {self.vision_feature_select_strategy}")
 
         image_features = self.multi_modal_mlp(selected_image_feature)
+        # debug: 内存泄漏
+        del image_outputs, selected_image_feature
         return image_features
 
     @torch.no_grad()
@@ -274,6 +276,9 @@ class Mineru2QwenForCausalLM(nn.Module):
                     pixel_values = torch.tensor(np.array(pixel_values), device=self.vision_tower.device)
                     image_features = self.encode_images(pixel_values)
                     # image_features: BS, 576, 4096
+
+                # debug: 内存泄露
+                del pixel_values
 
                 if self.mm_patch_merge_type.startswith("spatial"):
                     new_image_features = []
