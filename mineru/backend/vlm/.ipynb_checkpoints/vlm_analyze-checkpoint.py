@@ -67,7 +67,7 @@ def doc_analyze(
     # dy 异步改造
     pdf_doc = pdfium.PdfDocument(pdf_bytes)
     results, images_list = predictor.batch_predict_better(
-        image_gen=load_images_from_pdf_async_gen(pdf_bytes), max_concurrency=10
+        image_gen=load_images_from_pdf_async_gen(pdf_doc), max_concurrency=10
     )
 
     middle_json = result_to_middle_json(results, images_list, pdf_doc, image_writer)

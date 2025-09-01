@@ -56,10 +56,9 @@ def load_images_from_pdf(
 
 
 async def load_images_from_pdf_async_gen(
-    pdf_bytes, dpi=200, start_page_id=0, end_page_id=None
+    pdf_doc, dpi=200, start_page_id=0, end_page_id=None
 ):
     loop = asyncio.get_running_loop()
-    pdf_doc = pdfium.PdfDocument(pdf_bytes)
     pdf_page_num = len(pdf_doc)
     end_page_id = (
         end_page_id
